@@ -11,10 +11,10 @@ author = "Julian"
 # -----------------------------------Define Functions-------------------------------------------- #
 
 def create_journal():
-    name = input("Name your journal: ")  # Ask for a name for the journal
+    name = input("Name your journal: ")  
 
-    cwd = os.getcwd()  # Uses os import to get current path
-    path = cwd + "/" + name  # Concatenate to create a new path
+    cwd = os.getcwd()  
+    path = cwd + "/" + name  
 
     try:
         os.mkdir(path)
@@ -27,8 +27,8 @@ def create_journal():
 
 
 def open_journal():
-    os.chdir(os.getcwd())  # change the directory to the current path
-    journal_list = os.listdir()  # get list of the journals within the current directory
+    os.chdir(os.getcwd())  
+    journal_list = os.listdir()  
     if len(journal_list) == 0:
         os.chdir('..')
     else:
@@ -36,52 +36,52 @@ def open_journal():
         print("\n" + "Current # of Journals: " + str(len(journal_list)))
         print("---------Journals---------")
         for journal in journal_list:
-            print(journal)  # Print out each journal name
+            print(journal)  
 
-        name = input("\n" + "Name of journal: ")  # Ask user to select a journal
-        cwd = os.getcwd()  # Find directory we're in
-        path = cwd + "/" + name  # update path
-        os.chdir(path)  # Change directories to the path we determined
+        name = input("\n" + "Name of journal: ")  
+        cwd = os.getcwd()  
+        path = cwd + "/" + name  
+        os.chdir(path)  
 
-        directory_list = os.listdir()  # Get a list of entries
+        directory_list = os.listdir()  
         print("\n" + "Current Entries: " + str(len(directory_list)))
         for entry in directory_list:
-            print(entry)  # Display entries for the user
+            print(entry)  
 
         entry_controls()
 
 
 def fetch_content():
-    new_content = input("Write till your heart's content: ")  # Input
+    new_content = input("Tell me all of your secrets: ")  
     return new_content
 
 
 def add_content():
-    directory_list = os.listdir()  # List the entries
+    directory_list = os.listdir()  
 
     # print("Available entries: ")
     # for entry in directory_list:
     #    print(entry)
 
-    title = input("What's the title of your entry? ")  # Get a title
+    title = input("What's the title of your entry? ")  
 
-    filename = title.replace(" ", "") + ".txt"  # Updates journal entry
+    filename = title.replace(" ", "") + ".txt"  
     if filename in directory_list:
-        print("Heck yeah, dude. Well done. Opening entry.")
+        print("Well done. Opening entry.")
     elif filename not in directory_list:
         print("Invalid user entry or no entries currently exist in this journal." + "\n" + "Please try again: ")
         add_content()
     else:
         return
 
-    entry = open(filename, "a+")  # Create/open our file
+    entry = open(filename, "a+")  
     for line in entry:
         print(line) # Can't seem to get add_content() to print the existing text
 
     entry.write("\n\n")
-    entry.write(author + "\n")  # Add the user's name
-    entry.write(title + "\n")  # Add the chosen title
-    entry.write(str(datetime.datetime.now()) + "\n")  # Add the date
+    entry.write(author + "\n")  
+    entry.write(title + "\n")  
+    entry.write(str(datetime.datetime.now()) + "\n")  
 
     content = fetch_content()  # Grab content
 
@@ -89,7 +89,7 @@ def add_content():
     entry.write("\n")
     for i in range(0, len(content)):
         entry.write(content[i])
-        if content[i] == " ":  # determine if we have a space and increase the counter
+        if content[i] == " ":  
             count += 1
             # print(count) Use this for debugging the count if it isn't incrementing properly
             if count >= 10:
@@ -122,7 +122,7 @@ def journal_controls():
     print("2: Open a journal")
     print("3: Exit program")
     option = input("\n" + "Your choice: ")
-    # ^^This prefaces the user with options and asks for input
+    
 
     if option == "1" or option == 1:
         create_journal()
@@ -133,11 +133,11 @@ def journal_controls():
     else:
         print("Please answer based on the available choices")
         journal_controls()
-    # Conditions that execute functions based on user's choice
+    
 
 
 def entry_controls():
-    directory_list = os.listdir()  # List the entries
+    directory_list = os.listdir()  
 
     if len(directory_list) == 0:
         option = input("No entries currently exist. Would you like to create an entry? (y/n): ")
@@ -178,8 +178,7 @@ def choice():
     elif choice != "y" or choice != "yes" or choice != "n" or choice != "no":
         choice = input("Invalid entry. Please select (y/n): ")
 
-    # Asks if the user wants to do anything else. If not,
-    # The program ends
+
 
 
 # -----------------------------------Program Begin-------------------------------------------- #
